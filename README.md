@@ -36,6 +36,12 @@ CodeRescue AI is an end-to-end Python debugging, code quality, and AI audit work
 - **Deterministic SVG Avatars**: Generates unique, procedural developer avatars deterministically from user emails.
 - **Real Sign-Up Notifications**: Dispatches automated email alerts to admin (`bkutkars@gmail.com`) via FormSubmit API or native Google SMTP.
 
+### 7. ⚔️ Python DSA Arena (100 Placement & Internship Challenges)
+- **100 Curated Problems**: Exactly **50 Easy**, **30 Medium**, and **20 Hard** challenges modeled after top LeetCode and Codeforces Div 2/1 rounds.
+- **Ultra-Fast Python Judge Engine (`dsa_judge.py`)**: Sub-millisecond sandboxed test runner with deep equality checking, execution time in milliseconds, and memory profiling.
+- **AST Complexity Profiler**: Predicts Big-O time and space complexity ($O(1)$, $O(\log N)$, $O(N)$, $O(N \log N)$, $O(N^2)$) and provides targeted interview advice.
+- **Placement Readiness Tracking**: Real-time progress bar, solved counters by difficulty, and company tags (Google, Amazon, Meta, Microsoft, Uber).
+
 ---
 
 ## 🚀 Quick Start

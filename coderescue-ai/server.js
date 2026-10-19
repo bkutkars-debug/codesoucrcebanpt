@@ -197,20 +197,224 @@ app.get("/api/auth/notifications", (req, res) => {
   });
 });
 
-// Test Email Dispatch Endpoint
-app.post("/api/auth/test-email", async (req, res) => {
+// Persistent DSA Storage
+const DSA_FILE = path.join(DATA_DIR, "dsa_questions.json");
+const DSA_PROGRESS_FILE = path.join(DATA_DIR, "dsa_progress.json");
+
+function loadDsaQuestions() {
   try {
-    const testUser = {
-      id: `usr_test_${Date.now()}`,
-      name: req.body.name || "Test User",
-      email: req.body.email || "test.developer@gmail.com",
-      avatarSeed: "avatar_test_preview"
-    };
-    const result = await sendSignupNotification({ user: testUser });
-    return res.json({ success: true, result });
-  } catch (err) {
-    return res.status(500).json({ success: false, error: err.message });
+    if (fs.existsSync(DSA_FILE)) {
+      return JSON.parse(fs.readFileSync(DSA_FILE, "utf-8"));
+    }
+  } catch (e) {
+    console.error("Failed to load DSA questions:", e.message);
   }
+  return [];
+}
+
+function loadDsaProgress() {
+  try {
+    if (fs.existsSync(DSA_PROGRESS_FILE)) {
+      return JSON.parse(fs.readFileSync(DSA_PROGRESS_FILE, "utf-8"));
+    }
+  } catch (e) {}
+  return { solvedQuestionIds: [], submissions: [] };
+}
+
+function saveDsaProgress(progress) {
+  try {
+    fs.writeFileSync(DSA_PROGRESS_FILE, JSON.stringify(progress, null, 2), "utf-8");
+  } catch (e) {
+    console.error("Failed to save DSA progress:", e.message);
+  }
+}
+
+function executeDsaJudge(code, entryFunction, testCases) {
+  return new Promise((resolve) => {
+    const judgeScript = path.join(__dirname, "dsa_judge.py");
+    const py = spawn(PYTHON_CMD, [judgeScript]);
+    let stdout = "";
+    let stderr = "";
+
+    py.stdout.on("data", (chunk) => { stdout += chunk.toString(); });
+    py.stderr.on("data", (chunk) => { stderr += chunk.toString(); });
+
+    py.on("error", (err) => {
+      resolve({ verdict: "INTERNAL_ERROR", error: err.message });
+    });
+
+    py.on("close", () => {
+      try {
+        const parsed = JSON.parse(stdout);
+        resolve(parsed);
+      } catch (err) {
+        resolve({
+          verdict: "INTERNAL_ERROR",
+          error: "Failed to parse judge output: " + (stderr || stdout || err.message)
+        });
+      }
+    });
+
+    py.stdin.write(JSON.stringify({ code, entryFunction, testCases }));
+    py.stdin.end();
+  });
+}
+
+// 1. Get All DSA Questions (with filtering by difficulty, category, search)
+app.get("/api/dsa/questions", (req, res) => {
+  const { difficulty, category, search } = req.query;
+  let questions = loadDsaQuestions();
+
+  if (difficulty && difficulty !== "All") {
+    questions = questions.filter((q) => q.difficulty.toLowerCase() === difficulty.toLowerCase());
+  }
+  if (category && category !== "All") {
+    questions = questions.filter((q) => q.category.toLowerCase().includes(category.toLowerCase()));
+  }
+  if (search) {
+    const qTerm = search.toLowerCase();
+    questions = questions.filter(
+      (q) =>
+        q.title.toLowerCase().includes(qTerm) ||
+        (q.companies && q.companies.some((c) => c.toLowerCase().includes(qTerm))) ||
+        q.category.toLowerCase().includes(qTerm)
+    );
+  }
+
+  // Summary mapping for fast catalog display
+  const summary = questions.map((q) => ({
+    id: q.id,
+    title: q.title,
+    difficulty: q.difficulty,
+    category: q.category,
+    companies: q.companies || [],
+    descriptionPreview: q.description.slice(0, 140) + "...",
+    examplesCount: (q.examples || []).length,
+    testCasesCount: (q.testCases || []).length
+  }));
+
+  const progress = loadDsaProgress();
+  const solvedSet = new Set(progress.solvedQuestionIds || []);
+
+  const totalEasy = loadDsaQuestions().filter(q => q.difficulty === "Easy").length;
+  const totalMed = loadDsaQuestions().filter(q => q.difficulty === "Medium").length;
+  const totalHard = loadDsaQuestions().filter(q => q.difficulty === "Hard").length;
+
+  res.json({
+    total: questions.length,
+    catalogTotal: loadDsaQuestions().length,
+    stats: {
+      easy: totalEasy,
+      medium: totalMed,
+      hard: totalHard,
+      solvedCount: solvedSet.size,
+      readinessScore: Math.min(100, Math.round((solvedSet.size / 100) * 100))
+    },
+    solvedIds: Array.from(solvedSet),
+    questions: summary
+  });
+});
+
+// 2. Get Single DSA Question by ID
+app.get("/api/dsa/questions/:id", (req, res) => {
+  const qId = parseInt(req.params.id, 10);
+  const questions = loadDsaQuestions();
+  const q = questions.find((item) => item.id === qId);
+
+  if (!q) {
+    return res.status(404).json({ error: `DSA Question #${qId} not found.` });
+  }
+
+  res.json(q);
+});
+
+// 3. Fast Run (Sample Test Cases)
+app.post("/api/dsa/run", async (req, res) => {
+  const { questionId, code } = req.body;
+  if (!code || typeof code !== "string") {
+    return res.status(400).json({ error: "Please provide valid Python code." });
+  }
+
+  const questions = loadDsaQuestions();
+  const q = questions.find((item) => item.id === parseInt(questionId, 10));
+  if (!q) {
+    return res.status(404).json({ error: "Question not found." });
+  }
+
+  const sampleCases = (q.testCases || []).slice(0, 2);
+  const judgeResult = await executeDsaJudge(code, q.entryFunction, sampleCases);
+  return res.json(judgeResult);
+});
+
+// 4. Submit Solution (All Test Cases + Evaluation Record)
+app.post("/api/dsa/submit", async (req, res) => {
+  const { questionId, code, userEmail } = req.body;
+  if (!code || typeof code !== "string") {
+    return res.status(400).json({ error: "Please provide valid Python code." });
+  }
+
+  const questions = loadDsaQuestions();
+  const q = questions.find((item) => item.id === parseInt(questionId, 10));
+  if (!q) {
+    return res.status(404).json({ error: "Question not found." });
+  }
+
+  const allCases = q.testCases || [];
+  const judgeResult = await executeDsaJudge(code, q.entryFunction, allCases);
+
+  // If Accepted, update user progress
+  const progress = loadDsaProgress();
+  const solvedSet = new Set(progress.solvedQuestionIds || []);
+
+  if (judgeResult.verdict === "ACCEPTED") {
+    solvedSet.add(q.id);
+    progress.solvedQuestionIds = Array.from(solvedSet);
+  }
+
+  progress.submissions.unshift({
+    timestamp: new Date().toISOString(),
+    questionId: q.id,
+    questionTitle: q.title,
+    difficulty: q.difficulty,
+    userEmail: userEmail || "anonymous",
+    verdict: judgeResult.verdict,
+    passedCount: judgeResult.passedCount,
+    totalCount: judgeResult.totalCount,
+    totalTimeMs: judgeResult.totalTimeMs,
+    complexity: judgeResult.complexity
+  });
+
+  saveDsaProgress(progress);
+
+  return res.json({
+    ...judgeResult,
+    solvedTotal: solvedSet.size,
+    isFirstTimeSolved: judgeResult.verdict === "ACCEPTED" && solvedSet.size > (progress.solvedQuestionIds.length - 1)
+  });
+});
+
+// 5. Get User DSA Placement Statistics
+app.get("/api/dsa/stats", (req, res) => {
+  const progress = loadDsaProgress();
+  const allQ = loadDsaQuestions();
+  const solvedSet = new Set(progress.solvedQuestionIds || []);
+
+  const solvedEasy = allQ.filter(q => q.difficulty === "Easy" && solvedSet.has(q.id)).length;
+  const solvedMed = allQ.filter(q => q.difficulty === "Medium" && solvedSet.has(q.id)).length;
+  const solvedHard = allQ.filter(q => q.difficulty === "Hard" && solvedSet.has(q.id)).length;
+
+  res.json({
+    totalSolved: solvedSet.size,
+    totalQuestions: allQ.length,
+    readinessScore: Math.round((solvedSet.size / allQ.length) * 100),
+    breakdown: {
+      easy: { solved: solvedEasy, total: 50 },
+      medium: { solved: solvedMed, total: 30 },
+      hard: { solved: solvedHard, total: 20 }
+    },
+    solvedQuestionIds: Array.from(solvedSet),
+    recentSubmissions: progress.submissions.slice(0, 15)
+  });
 });
 
 // Real code analysis endpoint

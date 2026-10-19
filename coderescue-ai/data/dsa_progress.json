@@ -1,0 +1,23 @@
+{
+  "solvedQuestionIds": [
+    1
+  ],
+  "submissions": [
+    {
+      "timestamp": "2026-10-19T03:35:40.836Z",
+      "questionId": 1,
+      "questionTitle": "Two Sum",
+      "difficulty": "Easy",
+      "userEmail": "bkutkars@gmail.com",
+      "verdict": "ACCEPTED",
+      "passedCount": 4,
+      "totalCount": 4,
+      "totalTimeMs": 0.05,
+      "complexity": {
+        "timeComplexity": "O(N) Linear (Optimal)",
+        "spaceComplexity": "O(N) Hash Table",
+        "interviewAdvice": "Optimal for technical interviews"
+      }
+    }
+  ]
+}

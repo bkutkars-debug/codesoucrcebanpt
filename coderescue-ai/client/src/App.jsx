@@ -4,6 +4,7 @@ import { AccuracyGraph, computeRealAccuracy } from "./AccuracyGraph";
 import { AIHeatmap } from "./AIHeatmap";
 import { GitIntegrationModal } from "./GitIntegrationModal";
 import { AuthPage, generateLiveAvatarSVG } from "./AuthPage";
+import { DsaArena } from "./DsaArena";
 
 const PRESETS = [
   {
@@ -97,6 +98,7 @@ function App() {
   const [backendHealth, setBackendHealth] = useState(null);
   const [modalOpen, setModalOpen] = useState(false);
   const [signupAlert, setSignupAlert] = useState(null);
+  const [appMode, setAppMode] = useState("debugger"); // "debugger" | "dsa"
   const [currentUser, setCurrentUser] = useState(() => {
     try {
       const saved = localStorage.getItem("coderescue_user");
@@ -312,6 +314,23 @@ function App() {
           </div>
         </div>
 
+        {/* Navigation Mode Switcher: Code Debugger vs Python DSA Arena */}
+        <div className="topbar-nav-switcher">
+          <button
+            className={`nav-mode-btn ${appMode === "debugger" ? "active" : ""}`}
+            onClick={() => setAppMode("debugger")}
+          >
+            🔍 Code Debugger & AI Linter
+          </button>
+          <button
+            className={`nav-mode-btn dsa-btn ${appMode === "dsa" ? "active" : ""}`}
+            onClick={() => setAppMode("dsa")}
+          >
+            ⚔️ Python DSA Arena
+            <span className="nav-badge-pill">100 Qs</span>
+          </button>
+        </div>
+
         <div className="header-meta">
           <button
             className="btn-cicd-launch"
@@ -434,8 +453,13 @@ function App() {
           </div>
         )}
 
-        {/* Hero Section */}
-        <div className="hero">
+        {/* Navigation Content Switching */}
+        {appMode === "dsa" ? (
+          <DsaArena currentUser={currentUser} />
+        ) : (
+          <>
+            {/* Hero Section */}
+            <div className="hero">
           <div className="hero-content">
             <span className="eyebrow">
               EXPLAINABLE AI ATTRIBUTION • SECURITY LINTER • GIT CI/CD WORKFLOW
@@ -967,8 +991,10 @@ function App() {
             />
           </div>
         </section>
+      </>
+    )}
 
-        {/* In-Page Footer */}
+    {/* In-Page Footer */}
         <footer>
           <div className="footer-left">
             <strong>CODERESCUE AI</strong> • Real AI Attribution & Security Debugger
