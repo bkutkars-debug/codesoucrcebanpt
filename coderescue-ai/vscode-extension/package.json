@@ -1,0 +1,46 @@
+{
+  "name": "coderescue-ai-vscode",
+  "displayName": "CodeRescue AI - Python AI Detector & Security Linter",
+  "description": "Granular heatmap attribution and security auditor for AI-generated Python boilerplate.",
+  "version": "1.0.0",
+  "publisher": "coderescue-ai",
+  "engines": {
+    "vscode": "^1.80.0"
+  },
+  "categories": [
+    "Linters",
+    "Programming Languages"
+  ],
+  "main": "./extension.js",
+  "activationEvents": [
+    "onLanguage:python"
+  ],
+  "contributes": {
+    "commands": [
+      {
+        "command": "coderescue.auditFile",
+        "title": "CodeRescue AI: Audit Current File for AI Boilerplate & Security"
+      },
+      {
+        "command": "coderescue.toggleHeatmap",
+        "title": "CodeRescue AI: Toggle Granular Attribution Heatmap"
+      }
+    ],
+    "configuration": {
+      "type": "object",
+      "title": "CodeRescue AI",
+      "properties": {
+        "coderescue.serverUrl": {
+          "type": "string",
+          "default": "http://localhost:5000",
+          "description": "CodeRescue AI backend server URL"
+        },
+        "coderescue.aiThreshold": {
+          "type": "number",
+          "default": 70,
+          "description": "Probability threshold (0-100) to highlight code as AI boilerplate"
+        }
+      }
+    }
+  }
+}

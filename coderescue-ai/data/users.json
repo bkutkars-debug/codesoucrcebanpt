@@ -1,0 +1,38 @@
+[
+  {
+    "id": "usr_1792346639192_577",
+    "name": "Developer Alex",
+    "email": "alex.coderescue@gmail.com",
+    "passwordHash": "4dbd5e49147b5102ee2731ac03dd0db7decc3b8715c3df3c1f3ddc62dcbcf86d",
+    "avatarSeed": "avatar_14e4c453",
+    "avatarUrl": "/api/avatar/alex.coderescue%40gmail.com",
+    "createdAt": "2026-10-18T18:03:59.195Z"
+  },
+  {
+    "id": "usr_1792346791749_687",
+    "name": "utkarsh",
+    "email": "bkutkars@gmail.com",
+    "passwordHash": "c89e56f41f57456d59fd01ea5369d4c65c8217cbd7477cb3a98021c8a4212b4b",
+    "avatarSeed": "avatar_f6316739",
+    "avatarUrl": "/api/avatar/bkutkars%40gmail.com",
+    "createdAt": "2026-10-18T18:06:31.751Z"
+  },
+  {
+    "id": "usr_1792347760119_72",
+    "name": "CodeRescue Engineer",
+    "email": "engineer_1792347760060@gmail.com",
+    "passwordHash": "a109e36947ad56de1dca1cc49f0ef8ac9ad9a7b1aa0df41fb3c4cb73c1ff01ea",
+    "avatarSeed": "avatar_ec50bd41",
+    "avatarUrl": "/api/avatar/engineer_1792347760060%40gmail.com",
+    "createdAt": "2026-10-18T18:22:40.120Z"
+  },
+  {
+    "id": "usr_1792347908194_995",
+    "name": "utkarsh",
+    "email": "utkarsh99191@gmail.com",
+    "passwordHash": "c89e56f41f57456d59fd01ea5369d4c65c8217cbd7477cb3a98021c8a4212b4b",
+    "avatarSeed": "avatar_3b5e1332",
+    "avatarUrl": "/api/avatar/utkarsh99191%40gmail.com",
+    "createdAt": "2026-10-18T18:25:08.194Z"
+  }
+]

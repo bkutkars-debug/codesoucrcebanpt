@@ -1,0 +1,148 @@
+[
+  {
+    "timestamp": "10/18/2026, 11:55:08 PM",
+    "user": {
+      "id": "usr_1792347908194_995",
+      "name": "utkarsh",
+      "email": "utkarsh99191@gmail.com",
+      "passwordHash": "c89e56f41f57456d59fd01ea5369d4c65c8217cbd7477cb3a98021c8a4212b4b",
+      "avatarSeed": "avatar_3b5e1332",
+      "avatarUrl": "/api/avatar/utkarsh99191%40gmail.com",
+      "createdAt": "2026-10-18T18:25:08.194Z"
+    },
+    "deliveryChannel": "formsubmit_http",
+    "recipients": "bkutkars@gmail.com, bkutakrs@gmail.com",
+    "status": "awaiting_activation",
+    "needsActivation": true,
+    "primaryResponse": {
+      "statusCode": 200,
+      "success": true,
+      "delivered": false,
+      "needsActivation": true,
+      "message": "This form needs Activation. We've sent you an email containing an 'Activate Form' link. Just click it and your form will be actived!",
+      "data": {
+        "success": "false",
+        "message": "This form needs Activation. We've sent you an email containing an 'Activate Form' link. Just click it and your form will be actived!"
+      }
+    },
+    "secondaryResponse": {
+      "statusCode": 200,
+      "success": true,
+      "delivered": false,
+      "needsActivation": true,
+      "message": "This form needs Activation. We've sent you an email containing an 'Activate Form' link. Just click it and your form will be actived!",
+      "data": {
+        "success": "false",
+        "message": "This form needs Activation. We've sent you an email containing an 'Activate Form' link. Just click it and your form will be actived!"
+      }
+    },
+    "gmailWebComposeUrl": "https://mail.google.com/mail/?view=cm&fs=1&to=bkutkars%40gmail.com&su=%F0%9F%8E%89%20New%20CodeRescue%20AI%20Signup%3A%20utkarsh%20(utkarsh99191%40gmail.com)&body=New%20User%20Sign-Up%20on%20CodeRescue%20AI!%0A----------------------------------%0AUser%20Name%3A%20%20utkarsh%0AUser%20Email%3A%20utkarsh99191%40gmail.com%0AUser%20ID%3A%20%20%20%20usr_1792347908194_995%0ASigned%20At%3A%20%2010%2F18%2F2026%2C%2011%3A55%3A08%20PM%0AAvatar%3A%20%20%20%20%20avatar_3b5e1332%0A%0AThis%20real%20notification%20was%20automatically%20dispatched%20to%20bkutkars%40gmail.com."
+  },
+  {
+    "timestamp": "10/18/2026, 11:52:40 PM",
+    "user": {
+      "id": "usr_1792347760119_72",
+      "name": "CodeRescue Engineer",
+      "email": "engineer_1792347760060@gmail.com",
+      "passwordHash": "a109e36947ad56de1dca1cc49f0ef8ac9ad9a7b1aa0df41fb3c4cb73c1ff01ea",
+      "avatarSeed": "avatar_ec50bd41",
+      "avatarUrl": "/api/avatar/engineer_1792347760060%40gmail.com",
+      "createdAt": "2026-10-18T18:22:40.120Z"
+    },
+    "deliveryChannel": "formsubmit_http",
+    "recipients": "bkutkars@gmail.com, bkutakrs@gmail.com",
+    "status": "awaiting_activation",
+    "needsActivation": true,
+    "primaryResponse": {
+      "statusCode": 200,
+      "success": true,
+      "delivered": false,
+      "needsActivation": true,
+      "message": "This form needs Activation. We've sent you an email containing an 'Activate Form' link. Just click it and your form will be actived!",
+      "data": {
+        "success": "false",
+        "message": "This form needs Activation. We've sent you an email containing an 'Activate Form' link. Just click it and your form will be actived!"
+      }
+    },
+    "secondaryResponse": {
+      "statusCode": 200,
+      "success": true,
+      "delivered": false,
+      "needsActivation": true,
+      "message": "This form needs Activation. We've sent you an email containing an 'Activate Form' link. Just click it and your form will be actived!",
+      "data": {
+        "success": "false",
+        "message": "This form needs Activation. We've sent you an email containing an 'Activate Form' link. Just click it and your form will be actived!"
+      }
+    },
+    "gmailWebComposeUrl": "https://mail.google.com/mail/?view=cm&fs=1&to=bkutkars%40gmail.com&su=%F0%9F%8E%89%20New%20CodeRescue%20AI%20Signup%3A%20CodeRescue%20Engineer%20(engineer_1792347760060%40gmail.com)&body=New%20User%20Sign-Up%20on%20CodeRescue%20AI!%0A----------------------------------%0AUser%20Name%3A%20%20CodeRescue%20Engineer%0AUser%20Email%3A%20engineer_1792347760060%40gmail.com%0AUser%20ID%3A%20%20%20%20usr_1792347760119_72%0ASigned%20At%3A%20%2010%2F18%2F2026%2C%2011%3A52%3A40%20PM%0AAvatar%3A%20%20%20%20%20avatar_ec50bd41%0A%0AThis%20real%20notification%20was%20automatically%20dispatched%20to%20bkutkars%40gmail.com."
+  },
+  {
+    "timestamp": "10/18/2026, 11:52:26 PM",
+    "user": {
+      "id": "usr_test_1792347746855",
+      "name": "Verification Bot",
+      "email": "verify.bot@coderescue.ai",
+      "avatarSeed": "avatar_test_preview"
+    },
+    "deliveryChannel": "formsubmit_http",
+    "recipients": "bkutkars@gmail.com, bkutakrs@gmail.com",
+    "status": "awaiting_activation",
+    "needsActivation": true,
+    "primaryResponse": {
+      "statusCode": 200,
+      "success": true,
+      "delivered": false,
+      "needsActivation": true,
+      "message": "This form needs Activation. We've sent you an email containing an 'Activate Form' link. Just click it and your form will be actived!",
+      "data": {
+        "success": "false",
+        "message": "This form needs Activation. We've sent you an email containing an 'Activate Form' link. Just click it and your form will be actived!"
+      }
+    },
+    "secondaryResponse": {
+      "statusCode": 200,
+      "success": true,
+      "delivered": false,
+      "needsActivation": true,
+      "message": "This form needs Activation. We've sent you an email containing an 'Activate Form' link. Just click it and your form will be actived!",
+      "data": {
+        "success": "false",
+        "message": "This form needs Activation. We've sent you an email containing an 'Activate Form' link. Just click it and your form will be actived!"
+      }
+    },
+    "gmailWebComposeUrl": "https://mail.google.com/mail/?view=cm&fs=1&to=bkutkars%40gmail.com&su=%F0%9F%8E%89%20New%20CodeRescue%20AI%20Signup%3A%20Verification%20Bot%20(verify.bot%40coderescue.ai)&body=New%20User%20Sign-Up%20on%20CodeRescue%20AI!%0A----------------------------------%0AUser%20Name%3A%20%20Verification%20Bot%0AUser%20Email%3A%20verify.bot%40coderescue.ai%0AUser%20ID%3A%20%20%20%20usr_test_1792347746855%0ASigned%20At%3A%20%2010%2F18%2F2026%2C%2011%3A52%3A26%20PM%0AAvatar%3A%20%20%20%20%20avatar_test_preview%0A%0AThis%20real%20notification%20was%20automatically%20dispatched%20to%20bkutkars%40gmail.com."
+  },
+  {
+    "timestamp": "10/18/2026, 11:33:59 PM",
+    "user": {
+      "id": "usr_1792346639192_577",
+      "name": "Developer Alex",
+      "email": "alex.coderescue@gmail.com",
+      "passwordHash": "4dbd5e49147b5102ee2731ac03dd0db7decc3b8715c3df3c1f3ddc62dcbcf86d",
+      "avatarSeed": "avatar_14e4c453",
+      "avatarUrl": "/api/avatar/alex.coderescue%40gmail.com",
+      "createdAt": "2026-10-18T18:03:59.195Z"
+    },
+    "recipients": "bkutkars@gmail.com, bkutakrs@gmail.com",
+    "messageId": "<b2023d33-e281-5b1d-d396-99872bb349b6@coderescue.ai>",
+    "previewUrl": "https://ethereal.email/message/atUKD.k58fhxgjP1atUKF50L.yTpBlr0AAAAAVmCHxRlng-5ZFjYyJ3zzMY",
+    "status": "delivered"
+  },
+  {
+    "timestamp": "10/18/2026, 11:36:31 PM",
+    "user": {
+      "id": "usr_1792346791749_687",
+      "name": "utkarsh",
+      "email": "bkutkars@gmail.com",
+      "passwordHash": "c89e56f41f57456d59fd01ea5369d4c65c8217cbd7477cb3a98021c8a4212b4b",
+      "avatarSeed": "avatar_f6316739",
+      "avatarUrl": "/api/avatar/bkutkars%40gmail.com",
+      "createdAt": "2026-10-18T18:06:31.751Z"
+    },
+    "recipients": "bkutkars@gmail.com, bkutakrs@gmail.com",
+    "messageId": "<a5ca05ce-b99a-737c-35c4-93ff63221e01@coderescue.ai>",
+    "previewUrl": "https://ethereal.email/message/atUKD.k58fhxgjP1atUKq7JrKujo-ACCAAAAAry6yA5mdwm7-yAk-2Cuw5c",
+    "status": "delivered"
+  }
+]
