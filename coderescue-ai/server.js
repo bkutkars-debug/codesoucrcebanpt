@@ -20,6 +20,11 @@ const DATA_DIR = path.join(__dirname, "data");
 if (!fs.existsSync(DATA_DIR)) {
   fs.mkdirSync(DATA_DIR, { recursive: true });
 }
+const MEDIA_DIR = path.join(__dirname, "media");
+if (!fs.existsSync(MEDIA_DIR)) {
+  fs.mkdirSync(MEDIA_DIR, { recursive: true });
+}
+app.use("/media", express.static(MEDIA_DIR));
 const USERS_FILE = path.join(DATA_DIR, "users.json");
 
 function loadUsers() {

@@ -4,6 +4,38 @@
   ],
   "submissions": [
     {
+      "timestamp": "2026-10-19T03:47:05.062Z",
+      "questionId": 1,
+      "questionTitle": "Two Sum",
+      "difficulty": "Easy",
+      "userEmail": "utkarsh99191@gmail.com",
+      "verdict": "ACCEPTED",
+      "passedCount": 4,
+      "totalCount": 4,
+      "totalTimeMs": 0.04,
+      "complexity": {
+        "timeComplexity": "O(N) Linear (Optimal)",
+        "spaceComplexity": "O(N) Hash Table",
+        "interviewAdvice": "Optimal for technical interviews"
+      }
+    },
+    {
+      "timestamp": "2026-10-19T03:46:57.380Z",
+      "questionId": 1,
+      "questionTitle": "Two Sum",
+      "difficulty": "Easy",
+      "userEmail": "utkarsh99191@gmail.com",
+      "verdict": "ACCEPTED",
+      "passedCount": 4,
+      "totalCount": 4,
+      "totalTimeMs": 0.03,
+      "complexity": {
+        "timeComplexity": "O(N) Linear (Optimal)",
+        "spaceComplexity": "O(N) Hash Table",
+        "interviewAdvice": "Optimal for technical interviews"
+      }
+    },
+    {
       "timestamp": "2026-10-19T03:35:40.836Z",
       "questionId": 1,
       "questionTitle": "Two Sum",

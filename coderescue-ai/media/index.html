@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CodeRescue AI — Official Video Walkthrough & 14 Feature Gallery</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #090d16;
+      --card-bg: #131b2e;
+      --card-border: rgba(99, 102, 241, 0.25);
+      --primary: #38bdf8;
+      --accent: #818cf8;
+      --success: #34d399;
+      --warning: #fbbf24;
+      --danger: #f87171;
+      --text: #f1f5f9;
+      --text-muted: #94a3b8;
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      line-height: 1.6;
+      padding-bottom: 90px;
+    }
+    header {
+      background: linear-gradient(135deg, #090d16 0%, #1e1b4b 60%, #090d16 100%);
+      border-bottom: 1px solid var(--card-border);
+      padding: 2rem 1.5rem;
+      text-align: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(12px);
+    }
+    .header-badge {
+      display: inline-block;
+      background: rgba(56, 189, 248, 0.15);
+      color: var(--primary);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      padding: 0.3rem 0.8rem;
+      border-radius: 9999px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      margin-bottom: 0.75rem;
+    }
+    h1 {
+      font-size: 2.2rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, #38bdf8 0%, #a855f7 50%, #34d399 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 0.5rem;
+    }
+    .subtitle {
+      color: var(--text-muted);
+      font-size: 1rem;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    .container {
+      max-width: 1200px;
+      margin: 2rem auto;
+      padding: 0 1.5rem;
+    }
+    /* Video Section */
+    .video-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 12px 36px rgba(0,0,0,0.5);
+      margin-bottom: 3rem;
+    }
+    .video-header {
+      padding: 1.25rem 1.75rem;
+      background: rgba(255,255,255,0.03);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .video-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .video-player-container {
+      position: relative;
+      width: 100%;
+      background: #000;
+      aspect-ratio: 16 / 9;
+    }
+    video {
+      width: 100%;
+      height: 100%;
+      display: block;
+      outline: none;
+    }
+    .video-footer {
+      padding: 1.25rem 1.75rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .direct-link-btn {
+      background: linear-gradient(135deg, #6366f1 0%, #38bdf8 100%);
+      color: #fff;
+      text-decoration: none;
+      padding: 0.6rem 1.2rem;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: opacity 0.2s;
+    }
+    .direct-link-btn:hover {
+      opacity: 0.9;
+    }
+    /* 14 Features Grid */
+    .section-title {
+      font-size: 1.75rem;
+      font-weight: 800;
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+      gap: 1.5rem;
+      margin-top: 1.5rem;
+    }
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      overflow: hidden;
+      transition: transform 0.2s, border-color 0.2s;
+      display: flex;
+      flex-direction: column;
+    }
+    .card:hover {
+      transform: translateY(-4px);
+      border-color: var(--primary);
+    }
+    .card-img-wrap {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      background: #000;
+      overflow: hidden;
+    }
+    .card-img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.3s;
+    }
+    .card:hover .card-img-wrap img {
+      transform: scale(1.03);
+    }
+    .card-body {
+      padding: 1.25rem;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    .card-num {
+      color: var(--primary);
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.3rem;
+    }
+    .card-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+    .card-desc {
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      line-height: 1.5;
+      margin-bottom: 1rem;
+      flex: 1;
+    }
+    .card-footer {
+      border-top: 1px solid rgba(255,255,255,0.06);
+      padding-top: 0.75rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .card-footer a {
+      color: var(--primary);
+      text-decoration: none;
+      font-size: 0.8rem;
+      font-weight: 600;
+    }
+    .card-footer a:hover {
+      text-decoration: underline;
+    }
+    /* Fixed Spacebar Attribution */
+    .spacebar-footer {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background: linear-gradient(90deg, #090d16 0%, #1e1b4b 50%, #090d16 100%);
+      border-top: 1px solid rgba(99, 102, 241, 0.4);
+      padding: 0.75rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 9999;
+      box-shadow: 0 -4px 20px rgba(0,0,0,0.6);
+      font-size: 0.9rem;
+    }
+    .detector-badge {
+      background: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
+      color: #fff;
+      font-weight: 700;
+      padding: 0.25rem 0.65rem;
+      border-radius: 6px;
+      margin-right: 0.75rem;
+    }
+    .contact-link {
+      color: var(--primary);
+      font-weight: 600;
+      text-decoration: none;
+    }
+    .contact-link:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="header-badge">Complete Visual Demonstration</div>
+    <h1>🛡️ CodeRescue AI — Video & 14-Feature Gallery</h1>
+    <p class="subtitle">Comprehensive video walkthrough explaining every subsystem, accompanied by all 14 high-definition architectural illustrations.</p>
+  </header>
+
+  <div class="container">
+    
+    <!-- Video Player Card -->
+    <div class="video-card">
+      <div class="video-header">
+        <div class="video-title">
+          <span>🎬</span>
+          <span>Full Subsystem Walkthrough Video (HD 1280x720)</span>
+        </div>
+        <span class="header-badge" style="margin: 0;">45 Seconds • 24 FPS</span>
+      </div>
+      <div class="video-player-container">
+        <video controls autoplay muted playsinline poster="images/01_project_overview_banner.jpg">
+          <source src="coderescue_explanation_walkthrough.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+      </div>
+      <div class="video-footer">
+        <div>
+          <strong>Walkthrough Video URL:</strong>
+          <code style="background: rgba(0,0,0,0.3); padding: 0.3rem 0.6rem; border-radius: 6px; color: var(--primary); margin-left: 0.5rem;">http://localhost:5000/media/coderescue_explanation_walkthrough.mp4</code>
+        </div>
+        <a href="coderescue_explanation_walkthrough.mp4" download class="direct-link-btn">
+          ⬇️ Download MP4 Video
+        </a>
+      </div>
+    </div>
+
+    <!-- 14 Features Gallery -->
+    <h2 class="section-title">
+      <span>🖼️</span>
+      <span>The 14 Project Components (Visual Archive)</span>
+    </h2>
+    <p class="subtitle" style="margin: 0 0 1.5rem 0;">Every component engineered into CodeRescue AI with real, non-mock algorithmic verification.</p>
+
+    <div class="grid">
+
+      <!-- Card 1 -->
+      <div class="card">
+        <div class="card-img-wrap">
+          <img src="images/01_project_overview_banner.jpg" alt="Project Overview Banner">
+        </div>
+        <div class="card-body">
+          <div class="card-num">Component 01</div>
+          <div class="card-title">CodeRescue AI Master Hub</div>
+          <p class="card-desc">Futuristic cybernetic banner showcasing the real Python Abstract Syntax Tree (AST) engine, cybersecurity matrix shields, and placement telemetry.</p>
+          <div class="card-footer">
+            <span style="color: var(--success); font-size: 0.8rem;">● Core Platform</span>
+            <a href="images/01_project_overview_banner.jpg" target="_blank">View Full Image ↗</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="card">
+        <div class="card-img-wrap">
+          <img src="images/02_user_avatar_auth_system.jpg" alt="User Avatar Auth System">
+        </div>
+        <div class="card-body">
+          <div class="card-num">Component 02</div>
+          <div class="card-title">Deterministic Avatar & Auth</div>
+          <p class="card-desc">Unique mathematical SVG avatar generation from user email hash, with live notification dispatch to mentor at bkutkars@gmail.com.</p>
+          <div class="card-footer">
+            <span style="color: var(--primary); font-size: 0.8rem;">● User Identity</span>
+            <a href="images/02_user_avatar_auth_system.jpg" target="_blank">View Full Image ↗</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="card">
+        <div class="card-img-wrap">
+          <img src="images/03_100_dsa_placement_arena.jpg" alt="100 DSA Arena">
+        </div>
+        <div class="card-body">
+          <div class="card-num">Component 03</div>
+          <div class="card-title">100 Python DSA Placement Arena</div>
+          <p class="card-desc">Curated technical placement curriculum: 50 Easy (emerald), 30 Medium (gold), 20 Hard (ruby) mapped to Google, Amazon, Meta, and Microsoft.</p>
+          <div class="card-footer">
+            <span style="color: var(--warning); font-size: 0.8rem;">● 100 Questions</span>
+            <a href="images/03_100_dsa_placement_arena.jpg" target="_blank">View Full Image ↗</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 4 -->
+      <div class="card">
+        <div class="card-img-wrap">
+          <img src="images/04_submillisecond_code_judge.jpg" alt="Sub-Millisecond Judge">
+        </div>
+        <div class="card-body">
+          <div class="card-num">Component 04</div>
+          <div class="card-title">Sub-Millisecond Code Judge</div>
+          <p class="card-desc">Ultra-fast in-memory test case runner executing user Python solutions in &lt; 1 ms with deep equality matching and zero mock results.</p>
+          <div class="card-footer">
+            <span style="color: var(--success); font-size: 0.8rem;">● High-Speed Runner</span>
+            <a href="images/04_submillisecond_code_judge.jpg" target="_blank">View Full Image ↗</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 5 -->
+      <div class="card">
+        <div class="card-img-wrap">
+          <img src="images/05_ast_complexity_profiler.jpg" alt="AST Complexity Profiler">
+        </div>
+        <div class="card-body">
+          <div class="card-num">Component 05</div>
+          <div class="card-title">AST Big-O Complexity Profiler</div>
+          <p class="card-desc">Automated algorithmic analysis parsing loop nesting and recursion to output Big-O Time & Space complexity plus placement interview advice.</p>
+          <div class="card-footer">
+            <span style="color: var(--accent); font-size: 0.8rem;">● Big-O Advisor</span>
+            <a href="images/05_ast_complexity_profiler.jpg" target="_blank">View Full Image ↗</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 6 -->
+      <div class="card">
+        <div class="card-img-wrap">
+          <img src="images/06_ast_syntax_error_engine.jpg" alt="AST Syntax Error Engine">
+        </div>
+        <div class="card-body">
+          <div class="card-num">Component 06</div>
+          <div class="card-title">AST Syntax Error Engine</div>
+          <p class="card-desc">Pinpoints exact line and column numbers for syntax defects, missing colons, unbalanced brackets, and generates 1-click repairs.</p>
+          <div class="card-footer">
+            <span style="color: var(--danger); font-size: 0.8rem;">● Real AST</span>
+            <a href="images/06_ast_syntax_error_engine.jpg" target="_blank">View Full Image ↗</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 7 -->
+      <div class="card">
+        <div class="card-img-wrap">
+          <img src="images/07_scope_name_error_resolver.jpg" alt="Scope NameError Resolver">
+        </div>
+        <div class="card-body">
+          <div class="card-num">Component 07</div>
+          <div class="card-title">Scope & NameError Resolver</div>
+          <p class="card-desc">Tracks Python LEGB scope hierarchy to catch undefined names, variable typos, and missing imports before code execution starts.</p>
+          <div class="card-footer">
+            <span style="color: var(--warning); font-size: 0.8rem;">● Symbol Tables</span>
+            <a href="images/07_scope_name_error_resolver.jpg" target="_blank">View Full Image ↗</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 8 -->
+      <div class="card">
+        <div class="card-img-wrap">
+          <img src="images/08_mutable_default_arg_linter.jpg" alt="Mutable Default Argument Linter">
+        </div>
+        <div class="card-body">
+          <div class="card-num">Component 08</div>
+          <div class="card-title">Anti-Pattern Linter (W001)</div>
+          <p class="card-desc">Detects mutable default arguments (def foo(items=[])) that silently share state across calls, suggesting clean 'None' initializations.</p>
+          <div class="card-footer">
+            <span style="color: var(--primary); font-size: 0.8rem;">● Anti-Pattern</span>
+            <a href="images/08_mutable_default_arg_linter.jpg" target="_blank">View Full Image ↗</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 9 -->
+      <div class="card">
+        <div class="card-img-wrap">
+          <img src="images/09_ai_attribution_heatmap.jpg" alt="AI Attribution Heatmap">
+        </div>
+        <div class="card-body">
+          <div class="card-num">Component 09</div>
+          <div class="card-title">AI Attribution Heatmap</div>
+          <p class="card-desc">Granular line-by-line classification of AI boilerplate vs. human-authored code with probability scores and color-coded visual highlighting.</p>
+          <div class="card-footer">
+            <span style="color: var(--danger); font-size: 0.8rem;">● Explainable AI</span>
+            <a href="images/09_ai_attribution_heatmap.jpg" target="_blank">View Full Image ↗</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 10 -->
+      <div class="card">
+        <div class="card-img-wrap">
+          <img src="images/10_security_vulnerability_scanner.jpg" alt="Security Vulnerability Scanner">
+        </div>
+        <div class="card-body">
+          <div class="card-num">Component 10</div>
+          <div class="card-title">Security Vulnerability Scanner</div>
+          <p class="card-desc">OWASP & CWE security audit detecting dangerous shell=True injection (CWE-78), raw SQL injection (CWE-89), and weak MD5 hashing (CWE-327).</p>
+          <div class="card-footer">
+            <span style="color: var(--danger); font-size: 0.8rem;">● OWASP / CWE</span>
+            <a href="images/10_security_vulnerability_scanner.jpg" target="_blank">View Full Image ↗</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 11 -->
+      <div class="card">
+        <div class="card-img-wrap">
+          <img src="images/11_hallucinated_api_detector.jpg" alt="Hallucinated API Detector">
+        </div>
+        <div class="card-body">
+          <div class="card-num">Component 11</div>
+          <div class="card-title">Hallucinated API Detector</div>
+          <p class="card-desc">Catches non-existent functions commonly hallucinated by AI (e.g., math.round(), dict.has_key()) and redirects to standard library methods.</p>
+          <div class="card-footer">
+            <span style="color: var(--warning); font-size: 0.8rem;">● Hallucination Filter</span>
+            <a href="images/11_hallucinated_api_detector.jpg" target="_blank">View Full Image ↗</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 12 -->
+      <div class="card">
+        <div class="card-img-wrap">
+          <img src="images/12_human_refactored_fix_engine.png" alt="Human Refactored Fix Engine">
+        </div>
+        <div class="card-body">
+          <div class="card-num">Component 12</div>
+          <div class="card-title">Human-Refactored Fix Engine</div>
+          <p class="card-desc">Transforms bloated, vulnerable code into clean, secure, idiomatic Python with side-by-side diff comparisons ready for immediate copy.</p>
+          <div class="card-footer">
+            <span style="color: var(--success); font-size: 0.8rem;">● Automated Refactor</span>
+            <a href="images/12_human_refactored_fix_engine.png" target="_blank">View Full Image ↗</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 13 -->
+      <div class="card">
+        <div class="card-img-wrap">
+          <img src="images/13_github_actions_pr_bot.jpg" alt="GitHub Actions PR Bot">
+        </div>
+        <div class="card-body">
+          <div class="card-num">Component 13</div>
+          <div class="card-title">GitHub Actions PR Review Bot</div>
+          <p class="card-desc">Simulated CI/CD bot posting automated Pull Request comments with risk alerts, boilerplate percentages, and merge checklists.</p>
+          <div class="card-footer">
+            <span style="color: var(--primary); font-size: 0.8rem;">● CI / CD Bot</span>
+            <a href="images/13_github_actions_pr_bot.jpg" target="_blank">View Full Image ↗</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 14 -->
+      <div class="card">
+        <div class="card-img-wrap">
+          <img src="images/14_accuracy_progress_analytics.jpg" alt="Accuracy Analytics Dashboard">
+        </div>
+        <div class="card-body">
+          <div class="card-num">Component 14</div>
+          <div class="card-title">Accuracy & Progress Analytics</div>
+          <p class="card-desc">Time-series graph tracking accuracy improvement over consecutive code runs, DSA topic mastery bars, and placement readiness gauges.</p>
+          <div class="card-footer">
+            <span style="color: var(--accent); font-size: 0.8rem;">● Real-time Metrics</span>
+            <a href="images/14_accuracy_progress_analytics.jpg" target="_blank">View Full Image ↗</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- Spacebar Attribution -->
+  <footer class="spacebar-footer">
+    <div style="display: flex; align-items: center;">
+      <span class="detector-badge">coderescue-ai</span>
+      <span style="color: #cbd5e1;">Real Python Error Detector & Placement Hub</span>
+    </div>
+    <div>
+      <span style="color: #94a3b8;">When you find difficult, message me:</span>
+      <a href="mailto:bkutkars@gmail.com" class="contact-link">bkutkars@gmail.com</a>
+    </div>
+  </footer>
+
+</body>
+</html>
